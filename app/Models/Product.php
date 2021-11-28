@@ -11,6 +11,16 @@ class Product extends Model
 
     protected $fillable = ['name', 'description', 'price'];
 
+    public function getPriceAttribute()
+    {
+        return $this->attributes['price'] / 100; // 1587 -> 15.87
+    }
+
+    public function setPriceAttribute($attr)
+    {
+        return $this->attributes['price'] = $attr * 100; //19.95 -> 1995
+    }
+
     public function store()
     {
         return $this->belongsTo(Store::class);
